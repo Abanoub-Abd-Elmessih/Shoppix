@@ -12,6 +12,7 @@ interface SwiperCarouselProps {
   pagination?: boolean;
   autoplay?: boolean;
   loop?: boolean;
+  spaceBetween?: number;
 }
 
 export const SwiperCarousel = ({
@@ -21,6 +22,7 @@ export const SwiperCarousel = ({
   navigation = false,
   pagination = false,
   autoplay = false,
+  spaceBetween = 50,
 }: SwiperCarouselProps) => {
   const autoplayConfig = autoplay
     ? { delay: interval, disableOnInteraction: false }
@@ -38,7 +40,7 @@ export const SwiperCarousel = ({
   return (
     <Swiper
       autoplay={autoplayConfig}
-      spaceBetween={50}
+      spaceBetween={spaceBetween}
       slidesPerView={1}
       pagination={paginationConfig}
       loop={loop}

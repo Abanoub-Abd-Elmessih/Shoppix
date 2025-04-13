@@ -3,7 +3,7 @@ import { SwiperCarousel } from "../Carousel";
 
 export const AuthCarousel = () => {
   return (
-    <SwiperCarousel pagination loop>
+    <SwiperCarousel pagination autoplay loop spaceBetween={0}>
       <DivContainer
         imagePath="/images/auth/auth1.jpg"
         imagePosition="bottom"
