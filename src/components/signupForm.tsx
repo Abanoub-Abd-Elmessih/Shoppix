@@ -16,6 +16,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "./ui/checkbox";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
+import Link from "next/link";
+import { FormInput } from "./FormInput";
 
 export const SignupForm = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -44,48 +46,27 @@ export const SignupForm = () => {
         className="space-y-4 w-full px-3 lg:w-3/4 border-t mt-2 pt-3"
       >
         {/* Name Field */}
-        <FormField
+        <FormInput
           control={form.control}
+          label="Full Name"
           name="name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Full Name</FormLabel>
-              <FormControl>
-                <Input placeholder="Enter your name" {...field} />
-              </FormControl>
-              <FormMessage className="border p-2 rounded-md shadow" />
-            </FormItem>
-          )}
+          placeholder="Enter your name"
         />
 
         {/* Email Field */}
-        <FormField
+        <FormInput
           control={form.control}
+          label="Email"
           name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Email</FormLabel>
-              <FormControl>
-                <Input placeholder="Enter your email" {...field} />
-              </FormControl>
-              <FormMessage className="border p-2 rounded-md shadow" />
-            </FormItem>
-          )}
+          placeholder="Enter your email"
         />
 
         {/* Phone Field */}
-        <FormField
+        <FormInput
           control={form.control}
+          label="Phone"
           name="phone"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Phone</FormLabel>
-              <FormControl>
-                <Input placeholder="Enter your phone number" {...field} />
-              </FormControl>
-              <FormMessage className="border p-2 rounded-md shadow" />
-            </FormItem>
-          )}
+          placeholder="Enter your phone number"
         />
 
         {/* Password Field */}
@@ -98,13 +79,13 @@ export const SignupForm = () => {
               <FormControl>
                 <div className="relative">
                   <Input
-                    type={showPassword ? "text" : "password"} // Toggle password visibility
+                    type={showPassword ? "text" : "password"}
                     placeholder="Enter your password"
                     {...field}
                   />
                   <button
                     type="button"
-                    onClick={() => setShowPassword(!showPassword)} // Toggle the password visibility
+                    onClick={() => setShowPassword(!showPassword)}
                     className="absolute right-3 top-2"
                   >
                     {showPassword ? (
@@ -130,13 +111,13 @@ export const SignupForm = () => {
               <FormControl>
                 <div className="relative">
                   <Input
-                    type={showConfirmPassword ? "text" : "password"} // Toggle confirm password visibility
+                    type={showConfirmPassword ? "text" : "password"}
                     placeholder="Re-enter your password"
                     {...field}
                   />
                   <button
                     type="button"
-                    onClick={() => setShowConfirmPassword(!showConfirmPassword)} // Toggle confirm password visibility
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                     className="absolute right-3 top-2"
                   >
                     {showConfirmPassword ? (
@@ -182,6 +163,13 @@ export const SignupForm = () => {
         <Button type="submit" className="w-full mt-4">
           Sign Up
         </Button>
+
+        <p className="text-gray-500 text-base text-center">
+          Already have an account ?
+          <Link href={"/sign-in"} className="underline ms-1 text-black">
+            Login
+          </Link>
+        </p>
       </form>
     </Form>
   );
