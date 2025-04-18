@@ -12,7 +12,7 @@ const SignUp = () => {
         <h2 className="text-3xl lg:text-4xl tracking-wide mb-2">
           Welcome to Shoppix !
         </h2>
-        <p className="text-gray-400 text-xl lg:text-lg">Create a new account</p>
+        <p className="text-gray-800 text-xl lg:text-lg">Create a new account</p>
       </div>
 
       {/* Form */}

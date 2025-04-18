@@ -121,6 +121,9 @@ export const SignupForm = () => {
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
                     className="absolute right-3 top-2"
+                    aria-label={
+                      showPassword ? "Hide password" : "Show password"
+                    }
                   >
                     {showPassword ? (
                       <EyeOffIcon className="h-5 w-5 text-gray-500" />
@@ -155,6 +158,9 @@ export const SignupForm = () => {
                     type="button"
                     onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                     className="absolute right-3 top-2"
+                    aria-label={
+                      showPassword ? "Hide rePassword" : "Show rePassword"
+                    }
                   >
                     {showConfirmPassword ? (
                       <EyeOffIcon className="h-5 w-5 text-gray-500" />
