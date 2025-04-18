@@ -58,6 +58,7 @@ export const SignupForm = () => {
         variant: "destructive",
       });
     },
+    
     retry: false,
   });
 
