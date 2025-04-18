@@ -12,10 +12,7 @@ export async function signUpFunction(data: SignUpSchema) {
 
     const responseData = response.data;
 
-    if (
-      responseData.statusMsg === "fail" &&
-      responseData.message === "Account Already Exists"
-    ) {
+    if (response.status === 409) {
       throw new Error("Email is already registered.");
     }
 
