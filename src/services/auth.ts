@@ -12,10 +12,6 @@ export async function signUpFunction(data: SignUpSchema) {
 
     const responseData = response.data;
 
-    if (response.status === 409) {
-      throw new Error("Email is already registered.");
-    }
-
     if (responseData.token) {
       const cookieStore = await cookies();
       cookieStore.set("token", responseData.token, {
@@ -25,13 +21,22 @@ export async function signUpFunction(data: SignUpSchema) {
         path: "/",
         maxAge: 60 * 60 * 24 * 7,
       });
+
+      return responseData;
     }
 
-    return responseData;
+    throw new Error("Registration failed: No authentication token received");
   } catch (error) {
-    if (axios.isAxiosError(error) && error.response?.data?.message) {
-      throw new Error(error.response.data.message);
+    if (axios.isAxiosError(error)) {
+      if (error.response?.status === 409) {
+        throw new Error("Email is already registered.");
+      }
+
+      throw new Error(error.response?.data?.message || "Registration failed");
     }
-    throw error;
+
+    throw new Error(
+      error instanceof Error ? error.message : "An unknown error occurred"
+    );
   }
 }
