@@ -45,6 +45,7 @@ export const SigninForm = () => {
           label="Email"
           name="email"
           placeholder="Enter your email"
+          id="email"
         />
 
         {/* Password Field */}
