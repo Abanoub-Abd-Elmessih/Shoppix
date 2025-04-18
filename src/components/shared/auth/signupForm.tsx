@@ -14,14 +14,20 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "./ui/checkbox";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
 import Link from "next/link";
 import { FormInput } from "./FormInput";
+import { Checkbox } from "@/components/ui/checkbox";
+import { useMutation } from "@tanstack/react-query";
+import { signUpFunction } from "@/services/auth";
+import { toast } from "@/hooks/use-toast";
+import { useRouter } from "next/navigation";
+import { Loader } from "@/components/Loader";
 
 export const SignupForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const router = useRouter();
 
   const form = useForm<SignUpSchema>({
     resolver: zodResolver(signUpSchema),
@@ -30,20 +36,40 @@ export const SignupForm = () => {
       email: "",
       phone: "",
       password: "",
-      confirmPassword: "",
+      rePassword: "",
       terms: false,
     },
   });
 
+  const { mutate, isPending } = useMutation({
+    mutationFn: signUpFunction,
+    onSuccess: () => {
+      toast({
+        title: "Success",
+        description: "Your account has been created successfully!",
+        className: "bg-green-500",
+      });
+      router.push("/");
+    },
+    onError: (error: Error) => {
+      toast({
+        title: "Error",
+        description: error.message || "Error during sign-up",
+        variant: "destructive",
+      });
+    },
+    retry: false,
+  });
+
   const onSubmit = (values: SignUpSchema) => {
-    console.log("Form Values:", values);
+    mutate(values);
   };
 
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-4 w-full px-3 lg:w-3/4 border-t mt-2 pt-3"
+        className="space-y-4 w-full px-3 border-t mt-2 pt-3"
       >
         {/* Name Field */}
         <FormInput
@@ -51,6 +77,8 @@ export const SignupForm = () => {
           label="Full Name"
           name="name"
           placeholder="Enter your name"
+          autoComplete="username"
+          id="name"
         />
 
         {/* Email Field */}
@@ -59,6 +87,8 @@ export const SignupForm = () => {
           label="Email"
           name="email"
           placeholder="Enter your email"
+          autoComplete="username"
+          id="email"
         />
 
         {/* Phone Field */}
@@ -67,6 +97,8 @@ export const SignupForm = () => {
           label="Phone"
           name="phone"
           placeholder="Enter your phone number"
+          autoComplete="username"
+          id="phone"
         />
 
         {/* Password Field */}
@@ -79,9 +111,11 @@ export const SignupForm = () => {
               <FormControl>
                 <div className="relative">
                   <Input
+                    id="password"
                     type={showPassword ? "text" : "password"}
                     placeholder="Enter your password"
                     {...field}
+                    autoComplete="new-password"
                   />
                   <button
                     type="button"
@@ -104,16 +138,18 @@ export const SignupForm = () => {
         {/* Confirm Password Field */}
         <FormField
           control={form.control}
-          name="confirmPassword"
+          name="rePassword"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Confirm Password</FormLabel>
               <FormControl>
                 <div className="relative">
                   <Input
+                    id="rePassword"
                     type={showConfirmPassword ? "text" : "password"}
                     placeholder="Re-enter your password"
                     {...field}
+                    autoComplete="new-password"
                   />
                   <button
                     type="button"
@@ -160,13 +196,13 @@ export const SignupForm = () => {
           )}
         />
 
-        <Button type="submit" className="w-full mt-4">
-          Sign Up
+        <Button type="submit" className="w-full mt-4" disabled={isPending}>
+          {isPending ? <Loader /> : "Sign Up"}
         </Button>
 
         <p className="text-gray-500 text-base text-center">
-          Already have an account ?
-          <Link href={"/sign-in"} className="underline ms-1 text-black">
+          Already have an account?
+          <Link href="/sign-in" className="underline ms-1 text-black">
             Login
           </Link>
         </p>

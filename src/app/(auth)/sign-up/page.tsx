@@ -1,4 +1,4 @@
-import { SignupForm } from "@/components/signupForm";
+import { SignupForm } from "@/components/shared/auth/signupForm";
 
 export const metadata = {
   title: "Register",
@@ -6,7 +6,7 @@ export const metadata = {
 
 const SignUp = () => {
   return (
-    <section className="h-full flex flex-col justify-center items-center py-10">
+    <section className="w-full py-10">
       {/* Welcome Text */}
       <div className="text-center mb-3">
         <h2 className="text-3xl lg:text-4xl tracking-wide mb-2">

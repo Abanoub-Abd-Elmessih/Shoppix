@@ -11,18 +11,22 @@ import { Input } from "@/components/ui/input";
 
 interface FormInputProps {
   control: any;
+  id: string;
   name: string;
   label: string;
   placeholder?: string;
   type?: string;
+  autoComplete?: string;
 }
 
 export const FormInput = ({
   control,
+  id,
   name,
   label,
   placeholder,
   type = "text",
+  autoComplete,
 }: FormInputProps) => {
   return (
     <FormField
@@ -30,9 +34,15 @@ export const FormInput = ({
       name={name}
       render={({ field }) => (
         <FormItem>
-          <FormLabel>{label}</FormLabel>
+          <FormLabel htmlFor={id}>{label}</FormLabel>
           <FormControl>
-            <Input type={type} placeholder={placeholder} {...field} />
+            <Input
+              id={id}
+              type={type}
+              placeholder={placeholder}
+              {...field}
+              autoComplete={autoComplete}
+            />
           </FormControl>
           <FormMessage className="border p-2 rounded-md shadow" />
         </FormItem>

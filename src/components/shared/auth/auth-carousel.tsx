@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { SwiperCarousel } from "../Carousel";
+import { SwiperCarousel } from "../../SwiperCarousel";
 
 export const AuthCarousel = () => {
   return (
@@ -38,10 +38,14 @@ const DivContainer = ({
     <div className="relative cursor-grab bg-black/30 h-full">
       <Image
         src={imagePath}
-        alt=""
-        layout="fill"
-        objectFit="cover"
-        objectPosition={imagePosition}
+        alt="Carousel Image"
+        fill
+        sizes="100%"
+        priority
+        style={{
+          objectFit: "cover",
+          objectPosition: imagePosition,
+        }}
         className="-z-10"
       />
       <div className=" absolute top-[70%] right-[50%] text-center translate-x-1/2">

@@ -18,7 +18,7 @@ interface SwiperCarouselProps {
 export const SwiperCarousel = ({
   children,
   interval = 3000,
-  loop = true,
+  loop = false,
   navigation = false,
   pagination = false,
   autoplay = false,

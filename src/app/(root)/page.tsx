@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export const metadata = {
   title: "Home",
@@ -7,7 +8,9 @@ export const metadata = {
 export default function Home() {
   return (
     <div>
-      <Button>Button</Button>
+      <Button>
+        <Link href={"/sign-up"}>Register</Link>
+      </Button>
     </div>
   );
 }
