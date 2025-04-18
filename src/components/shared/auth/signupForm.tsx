@@ -127,9 +127,9 @@ export const SignupForm = () => {
                     }
                   >
                     {showPassword ? (
-                      <EyeOffIcon className="h-5 w-5 text-gray-500" />
+                      <EyeOffIcon className="size-5 text-gray-500" />
                     ) : (
-                      <EyeIcon className="h-5 w-5 text-gray-500" />
+                      <EyeIcon className="size-5 text-gray-500" />
                     )}
                   </button>
                 </div>
@@ -164,9 +164,9 @@ export const SignupForm = () => {
                     }
                   >
                     {showConfirmPassword ? (
-                      <EyeOffIcon className="h-5 w-5 text-gray-500" />
+                      <EyeOffIcon className="size-5 text-gray-500" />
                     ) : (
-                      <EyeIcon className="h-5 w-5 text-gray-500" />
+                      <EyeIcon className="size-5 text-gray-500" />
                     )}
                   </button>
                 </div>
